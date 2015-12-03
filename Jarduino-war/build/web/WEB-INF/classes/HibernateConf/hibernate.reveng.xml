@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="datacenterreg"/>
+  <table-filter match-name="registry"/>
+  <table-filter match-name="user"/>
+  <table-filter match-name="normalvalue"/>
+  <table-filter match-name="sensor"/>
+  <table-filter match-name="sensortype"/>
+</hibernate-reverse-engineering>
