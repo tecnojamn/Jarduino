@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 
     <head>
@@ -201,6 +202,13 @@
 
                     <!-- Page Heading -->
                     <div class="row">
+                        <ul>
+                            <c:forEach items="${sensors}" var="sensor">
+                                <li>${sensor.id}</li>
+                                <li>${sensor.name}</li>
+                                <li>${sensor.type.name}</li>
+                                </c:forEach>
+                        </ul>
                         <div class="col-lg-12">
                             <h1 class="page-header">
                                 Dashboard <small>Javardunio - all rights not reserved</small>
@@ -260,7 +268,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                 <a href="sensors_table.html">
+                                <a href="sensors_table.html">
                                     <div class="panel-footer">
                                         <span class="pull-left">Check sensor</span>
                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -282,7 +290,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                 <a href="sensors_table.html">
+                                <a href="sensors_table.html">
                                     <div class="panel-footer">
                                         <span class="pull-left">Check sensor</span>
                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
