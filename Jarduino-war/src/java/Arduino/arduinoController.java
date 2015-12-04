@@ -22,6 +22,7 @@ import org.hibernate.Transaction;
 import HibernateConf.HibernateUtil;
 import DAO.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -159,7 +160,7 @@ public class arduinoController implements SerialPortEventListener {
         }
         // Ignore all the other eventTypes, but you should consider the other ones.
     }
-
+    
     public static void main(String[] args) throws Exception {
         arduinoController main = arduinoController.GetInstance();
         main.connect();
