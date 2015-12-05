@@ -7,26 +7,20 @@ package Servlets;
 
 import DAO.Sensor;
 import HibernateConf.HibernateUtil;
-import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 
-
 /**
  *
  * @author Nicolas
  */
-@WebServlet(name = "SensorServlet", urlPatterns = {"/Sensor"})
-public class SensorServlet extends HttpServlet {
+public class HomeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,34 +33,18 @@ public class SensorServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         Session session = HibernateUtil.getSessionFactory().openSession();
         Sensor sensor;
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
-        String returnType = request.getParameter("returnType");
         if (action == null || action.isEmpty()) {
             action = "index";
         }
-
         if (action.equalsIgnoreCase("index")) {
-
-            List<Sensor> sensors = (List<Sensor>) session.createCriteria(Sensor.class).list();
-            if (returnType!=null && returnType.equals("json")) {
-                String json = new Gson().toJson(sensors);
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(json);
-                return;
-            }
-            request.setAttribute("sensors", sensors);
-            RequestDispatcher view = request.getRequestDispatcher("monitor.jsp");
-            view.forward(request, response);
-            return;
-        } else if (action.equalsIgnoreCase("other")) {
-
             List<Sensor> sensors = (List<Sensor>) session.createCriteria(Sensor.class).list();
             request.setAttribute("sensors", sensors);
-            RequestDispatcher view = request.getRequestDispatcher("monitor.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("home.jsp");
             view.forward(request, response);
             return;
         }
