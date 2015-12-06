@@ -7,6 +7,12 @@ and open the template in the editor.
     Created on : Dec 5, 2015, 11:28:45 PM
     Author     : Nicolas
 */
+#monitor-log p{
+    background: black;
+    padding: 12px;
+    color: red;
+    font-size: 10px;
+}
 .monitor-container div.registry{
     display: block;
     width: 100%;
@@ -33,7 +39,11 @@ ul.registry-item.new li{
     color:white;
 
 }
+ul.registry-item.j-alert li{
+    color: #fff;
+    background-color: #d9534f;
 
+}
 .btn-success.off{
     color: #fff;
     background-color: #d9534f;

@@ -40,6 +40,10 @@ var Monitor = function () {
             $(".registry.sensor-" + data.r_sensor_id).find(".registry-item").eq(0).addClass("new");
             $(".registry.sensor-" + data.r_sensor_id).find(".registry-item").eq(0).delay(1000).queue(function () {
                 $(this).removeClass("new");
+                //si se supera el valor en config...TODO IMPORTANT!
+                if (data.r_value > 10) {
+                    $(this).addClass("j-alert");
+                }
                 ;
             });
             if (total > MAX_VALS) {
@@ -58,18 +62,19 @@ var Monitor = function () {
         if (!FETCH_FLAG) {
             log("Monitor : killing fetching process " + kill_count + "...");
             kill_count--;
-            if(kill_count===0)log("Monitor  : Monitor is down.");
+            if (kill_count === 0)
+                log("Monitor  : Monitor is down.");
             return;
         }
         //ajax call
-        log("Monitor : working...");
+
         axReq = $.ajax({
             url: _this.SENSOR_FETCH_DATA_URL + sensorId
         }).done(function (data) {
             //allocate sensors
             updateSensorsUI(data);
             //callback
-            log("Monitor : sensor data fetched...");
+            log("Monitor : working...");
             fetchSensorData(sensorId, axReq);
         });
     };
