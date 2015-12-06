@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import DAO.Normalvalue;
 import DAO.Registry;
 import DAO.Sensor;
 import GsonAdapters.RegistryAdapter;
@@ -96,6 +97,17 @@ public class SensorServlet extends HttpServlet {
             r.setValue(Integer.parseInt(request.getParameter("val")));
 
             session.save(r);
+        } else if (action.equalsIgnoreCase("getSensorNormalVal")) {
+            String sid = request.getParameter("sId");
+            String hql = "SELECT * FROM normalvalue N WHERE N.idsensor =" + sid + "";
+            Normalvalue n = (Normalvalue) session.createSQLQuery(hql).addEntity(Normalvalue.class).setMaxResults(1).uniqueResult();
+            if (n == null) {
+                response.setStatus(404);
+            } else {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write("{'val':" + n.getValue() + "}");
+            }
         }
         session.flush();
         session.clear();

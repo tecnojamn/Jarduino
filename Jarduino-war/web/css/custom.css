@@ -33,3 +33,9 @@ ul.registry-item.new li{
     color:white;
 
 }
+
+.btn-success.off{
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}

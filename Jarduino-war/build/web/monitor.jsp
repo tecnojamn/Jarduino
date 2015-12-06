@@ -41,15 +41,23 @@
                                     <i class="fa fa-dashboard"></i> Monitor
                                 </li>
                             </ol>
+
                         </div>
                     </div>
                     <!-- /.row -->
+                    <div class="row" style="    margin-bottom: 10px;                         padding: 0 15px;">
+                        <button id="monitor-power" type="button" class="btn btn-lg btn-success">ON/OFF</button>
+                    </div>
+                    <div class="row" style="    margin-bottom: 10px;                         padding: 0 15px;">
+                        <div id="monitor-log"></div>
+                    </div>
 
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="alert alert-info alert-dismissable">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 Status : ${sensors.size()} sensors available
+
                             </div>
                         </div>
                     </div>
