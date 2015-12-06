@@ -44,8 +44,11 @@ public class HomeServlet extends HttpServlet {
         if (action.equalsIgnoreCase("index")) {
             List<Sensor> sensors = (List<Sensor>) session.createCriteria(Sensor.class).list();
             request.setAttribute("sensors", sensors);
+            session.flush();
             RequestDispatcher view = request.getRequestDispatcher("home.jsp");
             view.forward(request, response);
+            session.clear();
+            session.close();
             return;
         }
 

@@ -5,13 +5,19 @@
  */
 package Servlets;
 
+import DAO.Registry;
 import DAO.Sensor;
+import GsonAdapters.RegistryAdapter;
+import GsonAdapters.SensorAdapter;
 import HibernateConf.HibernateUtil;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +25,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
-
 
 /**
  *
@@ -38,9 +43,8 @@ public class SensorServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, InterruptedException {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Sensor sensor;
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         String returnType = request.getParameter("returnType");
@@ -49,27 +53,40 @@ public class SensorServlet extends HttpServlet {
         }
 
         if (action.equalsIgnoreCase("index")) {
-
             List<Sensor> sensors = (List<Sensor>) session.createCriteria(Sensor.class).list();
-            if (returnType!=null && returnType.equals("json")) {
-                String json = new Gson().toJson(sensors);
+
+            if (returnType != null && returnType.equals("json")) {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.registerTypeAdapter(Sensor.class, new SensorAdapter()).create();
+                String json = gson.toJson(sensors);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(json);
-                return;
-            }
-            request.setAttribute("sensors", sensors);
-            RequestDispatcher view = request.getRequestDispatcher("monitor.jsp");
-            view.forward(request, response);
-            return;
-        } else if (action.equalsIgnoreCase("other")) {
 
-            List<Sensor> sensors = (List<Sensor>) session.createCriteria(Sensor.class).list();
-            request.setAttribute("sensors", sensors);
-            RequestDispatcher view = request.getRequestDispatcher("monitor.jsp");
-            view.forward(request, response);
-            return;
+            } else {
+                request.setAttribute("sensors", sensors);
+                RequestDispatcher view = request.getRequestDispatcher("monitor.jsp");
+                view.forward(request, response);
+            }
+        } else if (action.equalsIgnoreCase("getSensorReg")) {
+            if (returnType != null && returnType.equals("json")) {
+                String sensorId = request.getParameter("sId");
+                Thread.sleep(2000);
+                String hql = "SELECT * FROM registry R WHERE R.idsensor =" + sensorId + " ORDER BY R.date DESC";
+                Registry r = (Registry) session.createSQLQuery(hql).addEntity(Registry.class).setMaxResults(1).uniqueResult();
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.registerTypeAdapter(Registry.class, new RegistryAdapter()).create();
+                String json = gson.toJson(r);
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
+
+            }
         }
+        session.flush();
+        session.clear();
+        session.close();
 
     }
 
@@ -85,7 +102,11 @@ public class SensorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SensorServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -99,7 +120,11 @@ public class SensorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SensorServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
