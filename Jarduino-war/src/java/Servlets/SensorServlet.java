@@ -15,6 +15,7 @@ import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,6 +72,11 @@ public class SensorServlet extends HttpServlet {
         } else if (action.equalsIgnoreCase("getSensorReg")) {
             if (returnType != null && returnType.equals("json")) {
                 String sensorId = request.getParameter("sId");
+                session.clear();
+                HibernateUtil.getSessionFactory().getCache().evictEntityRegions();
+                HibernateUtil.getSessionFactory().getCache().evictCollectionRegions();
+                HibernateUtil.getSessionFactory().getCache().evictDefaultQueryRegion();
+                HibernateUtil.getSessionFactory().getCache().evictQueryRegions();
                 Thread.sleep(2000);
                 String hql = "SELECT * FROM registry R WHERE R.idsensor =" + sensorId + " ORDER BY R.date DESC";
                 Registry r = (Registry) session.createSQLQuery(hql).addEntity(Registry.class).setMaxResults(1).uniqueResult();
@@ -83,6 +89,13 @@ public class SensorServlet extends HttpServlet {
                 response.getWriter().write(json);
 
             }
+        } else if (action.equalsIgnoreCase("createRegistry")) {
+            Registry r = new Registry();
+            r.setDate(new Date());
+            r.setIdsensor(Integer.parseInt(request.getParameter("id")));
+            r.setValue(Integer.parseInt(request.getParameter("val")));
+
+            session.save(r);
         }
         session.flush();
         session.clear();

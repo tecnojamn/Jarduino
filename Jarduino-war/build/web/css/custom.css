@@ -1,0 +1,35 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 5, 2015, 11:28:45 PM
+    Author     : Nicolas
+*/
+.monitor-container div.registry{
+    display: block;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    height: 155px;
+    overflow: auto;
+}
+ul.registry-item{
+    width: 100%;
+    padding: 0;
+}
+ul.registry-item li{
+    float: left;
+    width: 33.3%;
+    list-style: none;
+    background-color: whitesmoke;
+    padding: 5px;
+    border: 1px solid #DDDDDD;
+    border-bottom: none;
+}
+ul.registry-item.new li{
+    background-color: black;
+    color:white;
+
+}
