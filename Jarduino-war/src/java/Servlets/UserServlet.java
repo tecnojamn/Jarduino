@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.RequestDispatcher;
 import org.hibernate.Session;
 import HibernateConf.HibernateUtil;
@@ -39,15 +40,44 @@ public class UserServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        arduinoController main = arduinoController.GetInstance();
-        main.connect();
-        User us = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        us = (User) session.createQuery("from User Where id=1").list().get(0);
-        request.setAttribute("val", us.getUser());
-        RequestDispatcher view = request.getRequestDispatcher("templates/arduinoTest.jsp");
-        view.forward(request, response);
-        return;
+        String action = request.getParameter("action");
+        HttpSession session;
+        session = request.getSession();
+        if (session != null) {
+            //mostrar error, usted esta logueado
+            response.sendRedirect("home");
+
+            /**
+             * *******************SIN ACCION*****************************
+             */
+        } else if (action == null) {
+            RequestDispatcher view = request.getRequestDispatcher("login.html");
+            view.forward(request, response);
+
+            /**
+             * *******************ACCION LOGIN***************************
+             */
+        } else if (action.equals("login")) {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            User us = null;
+            try {
+                Session hibSession = HibernateUtil.getSessionFactory().openSession();
+                us = (User) hibSession.createQuery("from User Where user='" + username + "' and password='" + password + "'").list().get(0);
+
+            } catch (Exception e) {
+            }
+            if (us != null) {
+                session = request.getSession(true); //getSession(true) indica que se va a crear la sesion
+                session.setAttribute("user", us);
+                response.sendRedirect("home");
+            } else {
+                //mostrar error, login incorrecto
+            }
+            RequestDispatcher view;
+            view = request.getRequestDispatcher("login.html");
+            view.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
