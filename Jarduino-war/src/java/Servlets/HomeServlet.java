@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 
 /**
@@ -34,22 +35,26 @@ public class HomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Sensor sensor;
-        response.setContentType("text/html;charset=UTF-8");
-        String action = request.getParameter("action");
-        if (action == null || action.isEmpty()) {
-            action = "index";
-        }
-        if (action.equalsIgnoreCase("index")) {
-            List<Sensor> sensors = (List<Sensor>) session.createCriteria(Sensor.class).list();
-            request.setAttribute("sensors", sensors);
-            session.flush();
-            RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-            view.forward(request, response);
-            session.clear();
-            session.close();
-            return;
+        HttpSession session = request.getSession(true);
+        if (session.getAttribute("user") == null) {
+            response.sendRedirect("User");
+        } else {
+            Session hibernateSess = HibernateUtil.getSessionFactory().openSession();
+            Sensor sensor;
+            response.setContentType("text/html;charset=UTF-8");
+            String action = request.getParameter("action");
+            if (action == null || action.isEmpty()) {
+                action = "index";
+            }
+            if (action.equalsIgnoreCase("index")) {
+                List<Sensor> sensors = (List<Sensor>) hibernateSess.createCriteria(Sensor.class).list();
+                request.setAttribute("sensors", sensors);
+                hibernateSess.flush();
+                RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+                view.forward(request, response);
+                hibernateSess.clear();
+                hibernateSess.close();
+            }
         }
 
     }

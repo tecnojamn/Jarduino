@@ -20,6 +20,10 @@ import javax.servlet.annotation.WebServlet;
 import HibernateConf.HibernateUtil;
 import DAO.*;
 import Arduino.*;
+import Utils.MD5;
+import java.util.logging.Level;
+
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,6 +31,9 @@ import Arduino.*;
  */
 @WebServlet(name = "UserServlet", urlPatterns = {"/User"})
 public class UserServlet extends HttpServlet {
+
+    // assumes the current class is called logger
+    private final static Logger LOGGER = Logger.getLogger(UserServlet.class.getName());
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,45 +46,6 @@ public class UserServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String action = request.getParameter("action");
-        HttpSession session;
-        session = request.getSession();
-        if (session != null) {
-            //mostrar error, usted esta logueado
-            response.sendRedirect("home");
-
-            /**
-             * *******************SIN ACCION*****************************
-             */
-        } else if (action == null) {
-            RequestDispatcher view = request.getRequestDispatcher("login.html");
-            view.forward(request, response);
-
-            /**
-             * *******************ACCION LOGIN***************************
-             */
-        } else if (action.equals("login")) {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            User us = null;
-            try {
-                Session hibSession = HibernateUtil.getSessionFactory().openSession();
-                us = (User) hibSession.createQuery("from User Where user='" + username + "' and password='" + password + "'").list().get(0);
-
-            } catch (Exception e) {
-            }
-            if (us != null) {
-                session = request.getSession(true); //getSession(true) indica que se va a crear la sesion
-                session.setAttribute("user", us);
-                response.sendRedirect("home");
-            } else {
-                //mostrar error, login incorrecto
-            }
-            RequestDispatcher view;
-            view = request.getRequestDispatcher("login.html");
-            view.forward(request, response);
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -93,6 +61,24 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
+        HttpSession session;
+        session = request.getSession(true);
+        String action = request.getParameter("action");
+
+        if (session.getAttribute("user") == null) {
+            RequestDispatcher view;
+            view = request.getRequestDispatcher("login.jsp");
+            view.forward(request, response);
+        } else if (action != null && action.equals("logout")) {
+            session.setAttribute("user", null);
+            session.invalidate();
+            RequestDispatcher view;
+            view = request.getRequestDispatcher("login.jsp");
+            view.forward(request, response);
+        } else {
+            response.sendRedirect("home");
+        }
     }
 
     /**
@@ -107,6 +93,45 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session;
+        session = request.getSession();
+        String action = request.getParameter("action");
+
+        if (session.getAttribute("user") == null && action != null && action.equals("login")) {
+            LOGGER.info("login");
+
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            if (username != null && password != null) {
+
+                password = MD5.getMD5(password);
+                User us = null;
+                //Intenta traer el user de la BD
+                try {
+                    Session hibSession = HibernateUtil.getSessionFactory().openSession();
+                    us = (User) hibSession.createQuery("from User Where user='" + username + "' and password='" + password + "'").list().get(0);
+
+                } catch (Exception e) {
+                }
+                if (us != null) {
+                    session.setAttribute("user", us);
+                    response.sendRedirect("home");
+                } else {
+                    //login incorrecto
+                    request.setAttribute("error", 1);
+                    request.setAttribute("errorMessage", "Login incorrecto, intentelo nuevamente");
+                    RequestDispatcher view;
+                    view = request.getRequestDispatcher("login.jsp");
+                    view.forward(request, response);
+                }
+            } else {
+                RequestDispatcher view;
+                view = request.getRequestDispatcher("login.jsp");
+                view.forward(request, response);
+            }
+        }
+
     }
 
     /**
