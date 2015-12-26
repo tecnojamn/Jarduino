@@ -12,6 +12,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -25,7 +27,8 @@ public class RegistryAdapter implements JsonSerializer<Registry> {
         jsonObject.addProperty("r_id", r.getId());
         jsonObject.addProperty("r_sensor_id", r.getIdsensor());
         jsonObject.addProperty("r_value", r.getValue());
-        jsonObject.addProperty("r_date", r.getDate().toString());
+        jsonObject.addProperty("r_date", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(r.getDate()));
+        jsonObject.addProperty("r_date_ts", r.getDate().getTime());
         return jsonObject;
     }
 }

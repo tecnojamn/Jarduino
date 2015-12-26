@@ -88,7 +88,26 @@ public class SensorServlet extends HttpServlet {
                 response.getWriter().write(json);
 
             }
-        }else if (action.equalsIgnoreCase("createRegistry")) {
+        } else if (action.equalsIgnoreCase("getSensorRegAll")) {
+            if (returnType != null && returnType.equals("json")) {
+                String sensorId = request.getParameter("sId");
+                session.clear();
+                HibernateUtil.getSessionFactory().getCache().evictEntityRegions();
+                HibernateUtil.getSessionFactory().getCache().evictCollectionRegions();
+                HibernateUtil.getSessionFactory().getCache().evictDefaultQueryRegion();
+                HibernateUtil.getSessionFactory().getCache().evictQueryRegions();
+                String hql = "SELECT * FROM registry R WHERE R.idsensor =" + sensorId + " ORDER BY R.date DESC";
+                List<Registry> r = (List<Registry>) session.createSQLQuery(hql).addEntity(Registry.class).list();
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.registerTypeAdapter(Registry.class, new RegistryAdapter()).create();
+                String json = gson.toJson(r);
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
+
+            }
+        } else if (action.equalsIgnoreCase("createRegistry")) {
             Registry r = new Registry();
             r.setDate(new Date());
             r.setIdsensor(Integer.parseInt(request.getParameter("id")));
