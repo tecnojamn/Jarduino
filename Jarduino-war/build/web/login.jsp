@@ -1,3 +1,7 @@
+<%
+    Integer error = (Integer) request.getAttribute("error");
+    String errorMessage = (String) request.getAttribute("errorMessage");
+%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -29,6 +33,17 @@ and open the template in the editor.
 
     </head>
     <body>
+        <%
+            if (error != null) {
+        %>
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            <%=errorMessage%>
+        </div>
+        <%
+            }
+        %>
         <div class="container-fluid">
             <div class="row">
 
@@ -43,12 +58,12 @@ and open the template in the editor.
                         </div>
                         <div class="form-group">
                             <label>Password : </label>
-                            <input class="form-control" name="password" placeholder="Enter password">
+                            <input class="form-control" type="password" name="password" placeholder="Enter password">
                         </div>
                         <button type="submit" class="btn btn-default">Enter</button>
-                    </form>
+                    </form> 
                 </div>
-            </div></div>
-
+            </div> 
+        </div>
     </body>
 </html>

@@ -47,7 +47,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html">Jarduino - for the people</a>
+                    <a class="navbar-brand" href="home">Jarduino - for the people</a>
                 </div>
                 <!-- Top Menu Items -->
                 <ul class="nav navbar-right top-nav">
@@ -145,7 +145,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                <a href="User?action=logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                             </li>
                         </ul>
                     </li>
@@ -155,6 +155,9 @@
                     <ul class="nav navbar-nav side-nav">
                         <li class="active">
                             <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="Notifications"><i class="fa fa-fw fa-bar-chart-o"></i>Notifications</a>
                         </li>
                         <li>
                             <a href="login.html"><i class="fa fa-fw fa-bar-chart-o"></i>Sign in</a>

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/datacenterreg?zeroDateTimeBehavior=convertToNull</property>
-        <property name="hibernate.connection.password">123123123</property>
-    
-        <property name="hibernate.cache.use_query_cache">false</property>
-        <property name="hibernate.cache.use_second_level_cache">false</property>
-        <property name="connection.autocommit">true</property>
-        <mapping resource="DAO/User.hbm.xml"/>
-        <mapping resource="DAO/Normalvalue.hbm.xml"/>
-        <mapping resource="DAO/Sensortype.hbm.xml"/>
-        <mapping resource="DAO/Registry.hbm.xml"/>
-        <mapping resource="DAO/Sensor.hbm.xml"/>
-    </session-factory>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/datacenterreg?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.cache.use_query_cache">false</property>
+    <property name="hibernate.cache.use_second_level_cache">false</property>
+    <property name="connection.autocommit">true</property>
+    <property name="hibernate.connection.password">123123123</property>
+    <mapping resource="DAO/User.hbm.xml"/>
+    <mapping resource="DAO/Normalvalue.hbm.xml"/>
+    <mapping resource="DAO/Sensortype.hbm.xml"/>
+    <mapping resource="DAO/Registry.hbm.xml"/>
+    <mapping resource="DAO/Sensor.hbm.xml"/>
+    <mapping resource="DAO/Alert.hbm.xml"/>
+  </session-factory>
 </hibernate-configuration>
