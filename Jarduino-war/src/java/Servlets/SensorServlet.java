@@ -14,8 +14,6 @@ import HibernateConf.HibernateUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -90,7 +88,7 @@ public class SensorServlet extends HttpServlet {
                 response.getWriter().write(json);
 
             }
-        } else if (action.equalsIgnoreCase("createRegistry")) {
+        }else if (action.equalsIgnoreCase("createRegistry")) {
             Registry r = new Registry();
             r.setDate(new Date());
             r.setIdsensor(Integer.parseInt(request.getParameter("id")));
