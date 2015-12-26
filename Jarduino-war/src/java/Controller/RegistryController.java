@@ -19,6 +19,7 @@ import java.util.HashMap;
 import Utils.RegistryConf;
 import DAO.Registry;
 import HibernateConf.HibernateUtil;
+import com.google.gson.JsonObject;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
