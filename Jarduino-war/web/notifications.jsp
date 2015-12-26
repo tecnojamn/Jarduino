@@ -24,7 +24,10 @@
     </head>
     <body>
 
-        <div id="wrapper"  style="padding: 0;">
+
+        <div id="wrapper"  >
+
+            <jsp:include page="header.jsp" />
 
 
             <div id="page-wrapper">
@@ -48,59 +51,61 @@
                     </div>
 
 
-        
+
                     <!-- /.row -->
-                    <div class='row notifications-container container-fluid ' id='notifications_container'>
-                        <table class="table-striped table">
-                            <tr> 
-                                <th>#</th>
-                                <th>Sensor</th>
-                                <th>Value</th>
-                                <th>Date</th>
-                                <th>Seen</th>
-                            </tr>
-                            <c:forEach items="${alerts}" var="alert">
-                                <fmt:formatDate value="${alert.date}" var="formattedDate" 
-                                                type="date" pattern="MM-dd-yyyy HH:mm" />
-                                <tr>
-                                    <td><c:out value="${alert.id}"/></td>
-                                    <td><c:out value="${alert.idsensor}"/></td>  
-                                    <td><c:out value="${alert.value}"/></td>
-                                    <td><c:out value="${formattedDate}"/></td>
-                                    <c:choose>
-                                        <c:when test="${alert.seen==false}">
-                                            <td><img style="width:20px;" src="img/alert.gif" />New</td>
-                                        </c:when>
-                                        <c:otherwise >
-                                            <td></td>
-                                        </c:otherwise>
-                                    </c:choose>
+                    <div class='row' id=''>
+                        <div class="notifications-container  col-lg-12" id="notifications_container">
+                            <table class="table-striped table">
+                                <tr> 
+                                    <th>#</th>
+                                    <th>Sensor</th>
+                                    <th>Value</th>
+                                    <th>Date</th>
+                                    <th>Seen</th>
                                 </tr>
-                            </c:forEach>
-                        </table>
+                                <c:forEach items="${alerts}" var="alert">
+                                    <fmt:formatDate value="${alert.date}" var="formattedDate" 
+                                                    type="date" pattern="MM-dd-yyyy HH:mm" />
+                                    <tr>
+                                        <td><c:out value="${alert.id}"/></td>
+                                        <td><c:out value="${alert.idsensor}"/></td>  
+                                        <td><c:out value="${alert.value}"/></td>
+                                        <td><c:out value="${formattedDate}"/></td>
+                                        <c:choose>
+                                            <c:when test="${alert.seen==false}">
+                                                <td><img style="width:20px;" src="img/alert.gif" />New</td>
+                                                </c:when>
+                                                <c:otherwise >
+                                                <td></td>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                        </div>
+
+
+
+
+
+
                     </div>
-
-
-
+                    <!-- /.container-fluid -->
 
                 </div>
-                <!-- /.row -->
-
+                <!-- /#page-wrapper -->
 
             </div>
-            <!-- /.container-fluid -->
+            <!-- /#wrapper -->
 
         </div>
-        <!-- /#page-wrapper -->
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
 
-    </div>
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
 
 
-    <script src="js/ajax/javarduino_monitor.js"></script>
-</body>
+        <script src="js/ajax/javarduino_monitor.js"></script>
+    </body>
 </html>

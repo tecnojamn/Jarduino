@@ -22,9 +22,10 @@
     </head>
     <body>
 
-        <div id="wrapper"  style="padding: 0;">
+        <div id="wrapper" >
 
-
+            <jsp:include page="header.jsp" />
+            
             <div id="page-wrapper">
 
                 <div class="container-fluid">
