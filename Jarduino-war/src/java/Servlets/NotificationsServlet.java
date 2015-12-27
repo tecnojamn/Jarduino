@@ -108,7 +108,7 @@ public class NotificationsServlet extends HttpServlet {
         String action = request.getParameter("action");
         String returnType = request.getParameter("returnType");
 
-        if (action.equals("checkNewAlerts")) {
+        if (action!= null &&  action.equals("checkNewAlerts")) {
             Session session = HibernateUtil.getSessionFactory().openSession();
             String hql = "SELECT * FROM alert a WHERE a.seen = 0";
             boolean newAlerts = session.createSQLQuery(hql).addEntity(Alert.class).setMaxResults(1).list().size() > 0;

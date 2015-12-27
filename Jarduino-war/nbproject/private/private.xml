@@ -3,9 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nicolás/Documents/NetBeansProjects/Jarduino/Jarduino-war/src/java/Controller/RegistryController.java</file>
             <file>file:/C:/Users/Nicolás/Documents/NetBeansProjects/Jarduino/Jarduino-war/web/sensor_charts.html</file>
-            <file>file:/C:/Users/Nicolás/Documents/NetBeansProjects/Jarduino/Jarduino-war/src/java/GsonAdapters/RegistryAdapter.java</file>
+            <file>file:/C:/Users/Nicolás/Documents/NetBeansProjects/Jarduino/Jarduino-war/src/java/Arduino/helper.java</file>
             <file>file:/C:/Users/Nicolás/Documents/NetBeansProjects/Jarduino/Jarduino-war/src/java/Arduino/arduinoController.java</file>
             <file>file:/C:/Users/Nicolás/Documents/NetBeansProjects/Jarduino/Jarduino-war/src/java/Servlets/SensorServlet.java</file>
             <file>file:/C:/Users/Nicolás/Documents/NetBeansProjects/Jarduino/Jarduino-war/web/js/plugins/flot/flot-data.js</file>
