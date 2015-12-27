@@ -17,7 +17,7 @@ public class Alert implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-    private int idsensor;
+    private Sensor idsensor;
     private int value;
     private Date date;
     private boolean seen;
@@ -29,7 +29,7 @@ public class Alert implements Serializable {
         this.id = id;
     }
 
-    public Alert(Integer id, int idsensor, int value, Date date, boolean seen) {
+    public Alert(Integer id, Sensor idsensor, int value, Date date, boolean seen) {
         this.id = id;
         this.idsensor = idsensor;
         this.value = value;
@@ -45,11 +45,11 @@ public class Alert implements Serializable {
         this.id = id;
     }
 
-    public int getIdsensor() {
-        return idsensor;
+    public Sensor getIdsensor() {
+        return this.idsensor;
     }
 
-    public void setIdsensor(int idsensor) {
+    public void setIdsensor(Sensor idsensor) {
         this.idsensor = idsensor;
     }
 

@@ -68,7 +68,7 @@
                                                     type="date" pattern="MM-dd-yyyy HH:mm" />
                                     <tr>
                                         <td><c:out value="${alert.id}"/></td>
-                                        <td><c:out value="${alert.idsensor}"/></td>  
+                                        <td><c:out value="${alert.idsensor.name}"/></td>  
                                         <td><c:out value="${alert.value}"/></td>
                                         <td><c:out value="${formattedDate}"/></td>
                                         <c:choose>

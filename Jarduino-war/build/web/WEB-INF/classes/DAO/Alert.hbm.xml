@@ -10,9 +10,11 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
+        <!--
         <property name="idsensor" type="int">
             <column name="idsensor" not-null="true" />
         </property>
+        -->
         <property name="value" type="int">
             <column name="value" not-null="true" />
         </property>
@@ -22,5 +24,7 @@
         <property name="seen" type="boolean">
             <column name="seen" not-null="true" />
         </property>
+        <many-to-one name="idsensor" column="idsensor" 
+                     class="DAO.Sensor" not-null="true"/>
     </class>
 </hibernate-mapping>
