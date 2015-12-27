@@ -24,6 +24,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 
 /**
@@ -44,6 +45,16 @@ public class SensorServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, InterruptedException {
+        
+        HttpSession httpSession = request.getSession(true);
+
+        if (httpSession.getAttribute("user") == null) {
+            RequestDispatcher view;
+            view = request.getRequestDispatcher("login.jsp");
+            view.forward(request, response);
+            return;
+        }
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");

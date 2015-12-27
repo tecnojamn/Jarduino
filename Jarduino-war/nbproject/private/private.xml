@@ -3,12 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nicolás/Documents/NetBeansProjects/Jarduino/Jarduino-war/src/java/Controller/RegistryController.java</file>
-            <file>file:/C:/Users/Nicolás/Documents/NetBeansProjects/Jarduino/Jarduino-war/web/sensor_charts.html</file>
-            <file>file:/C:/Users/Nicolás/Documents/NetBeansProjects/Jarduino/Jarduino-war/src/java/Arduino/arduinoController.java</file>
-            <file>file:/C:/Users/Nicolás/Documents/NetBeansProjects/Jarduino/Jarduino-war/src/java/Servlets/HomeServlet.java</file>
-            <file>file:/C:/Users/Nicolás/Documents/NetBeansProjects/Jarduino/Jarduino-war/src/java/Servlets/SensorServlet.java</file>
-            <file>file:/C:/Users/Nicolás/Documents/NetBeansProjects/Jarduino/Jarduino-war/web/js/plugins/flot/flot-data.js</file>
+            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/HibernateConf/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/web/header_bk.jsp</file>
+            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/HibernateConf/HibernateUtil.java</file>
+            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/web/notifications.jsp</file>
+            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/web/home.jsp</file>
+            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/web/header.jsp</file>
+            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/web/index-rtl.html</file>
+            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/Servlets/NotificationsServlet.java</file>
+            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/web/monitor.jsp</file>
         </group>
     </open-files>
 </project-private>
