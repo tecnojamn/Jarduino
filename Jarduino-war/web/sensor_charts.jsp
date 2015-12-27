@@ -31,13 +31,30 @@
         <![endif]-->
 
     </head>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
     <script>
+        var chart_data = [];
+        $(document).ready(function () {
+
+
+            var chart_data_ax_req = $.get("Sensor?action=getSensorRegAll&sId=${sensor.id}&returnType=json");
+
+            chart_data_ax_req.done(function (data) {
+                $.each(data, function (i, item) {
+                    chart_data.push([item.r_date_ts, item.r_value]);
+                });
+                doPlot("right");
+            });
+
+
+        });
     </script>
     <body>
 
         <div id="wrapper">
 
-
+ <jsp:include page="header.jsp" />
 
             <div id="page-wrapper">
 
@@ -64,18 +81,14 @@
                     <!-- Flot Charts -->
                     <div class="row">
                         <div class="col-lg-12">
-                            <h2 class="page-header">SENSOR_NAME chart</h2>
+                            <h2 class="page-header"> ${sensor.name} chart</h2>
                         </div>
                     </div>
                     <!-- /.row -->
-
-
-
-
                     <div class="col-lg-12">
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Multiple Axes Line Graph Example with Tooltips and Raw Data</h3>
+                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> ${sensor.name} / Time</h3>
                             </div>
                             <div class="panel-body">
                                 <div class="flot-chart">
@@ -92,8 +105,7 @@
             <!-- /#page-wrapper -->
         </div>
         <!-- /#wrapper -->
-        <!-- jQuery -->
-        <script src="js/jquery.js"></script>
+
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
         <!-- Morris Charts JavaScript -->

@@ -45,7 +45,7 @@ public class SensorServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, InterruptedException {
-        
+
         HttpSession httpSession = request.getSession(true);
 
         if (httpSession.getAttribute("user") == null) {
@@ -54,7 +54,7 @@ public class SensorServlet extends HttpServlet {
             view.forward(request, response);
             return;
         }
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
@@ -79,6 +79,18 @@ public class SensorServlet extends HttpServlet {
                 RequestDispatcher view = request.getRequestDispatcher("monitor.jsp");
                 view.forward(request, response);
             }
+        } else if (action.equalsIgnoreCase("charts")) {
+            //get sensor id from parms
+            String sensorId = request.getParameter("sId");
+            //build query
+            String hql = "SELECT * FROM Sensor S WHERE S.id =" + sensorId + "";
+            Sensor sensor = (Sensor) session.createSQLQuery(hql).addEntity(Sensor.class).setMaxResults(1).uniqueResult();
+            //set sensor as frontend var
+            request.setAttribute("sensor", sensor);
+            RequestDispatcher view = request.getRequestDispatcher("sensor_charts.jsp");
+            //dispatch view
+            view.forward(request, response);
+
         } else if (action.equalsIgnoreCase("getSensorReg")) {
             if (returnType != null && returnType.equals("json")) {
                 String sensorId = request.getParameter("sId");

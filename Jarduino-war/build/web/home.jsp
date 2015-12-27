@@ -90,6 +90,13 @@
                                             <div class="clearfix"></div>
                                         </div>
                                     </a>
+                                    <a href="Sensor?action=charts&sId=${sensor.id}">
+                                        <div class="panel-footer">
+                                            <span class="pull-left">Time Chart</span>
+                                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </c:forEach>
