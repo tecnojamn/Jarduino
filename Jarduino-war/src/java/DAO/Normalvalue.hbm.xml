@@ -4,12 +4,13 @@
 <!-- Generated 02-dic-2015 22:23:00 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="DAO.Normalvalue" table="normalvalue" catalog="datacenterreg" optimistic-lock="version">
-        <id name="idsensor" type="int">
-            <column name="idsensor" />
-            <generator class="assigned" />
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="increment" />
         </id>
         <property name="value" type="int">
             <column name="value" not-null="true" />
         </property>
+        <one-to-one name="sensor" class="DAO.Sensor" cascade="all" /> <!--not-null="true"  column="sensor" unique="true"-->
     </class>
 </hibernate-mapping>

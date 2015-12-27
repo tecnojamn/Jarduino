@@ -8,25 +8,36 @@ package DAO;
  */
 public class Normalvalue  implements java.io.Serializable {
 
+    public Normalvalue(int id, Sensor sensor, int value) {
+        this.id = id;
+        this.sensor = sensor;
+        this.value = value;
+    }
 
-     private int idsensor;
+     private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Sensor getSensor() {
+        return sensor;
+    }
+
+    public void setSensor(Sensor sensor) {
+        this.sensor = sensor;
+    }
+     private Sensor sensor;
      private int value;
 
     public Normalvalue() {
     }
 
-    public Normalvalue(int idsensor, int value) {
-       this.idsensor = idsensor;
-       this.value = value;
-    }
-   
-    public int getIdsensor() {
-        return this.idsensor;
-    }
-    
-    public void setIdsensor(int idsensor) {
-        this.idsensor = idsensor;
-    }
+
     public int getValue() {
         return this.value;
     }

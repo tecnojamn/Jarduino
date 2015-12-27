@@ -3,16 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/Servlets/SensorServlet.java</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/HibernateConf/hibernate.cfg.xml</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/DAO/Alert.hbm.xml</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/HibernateConf/HibernateUtil.java</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/web/notifications.jsp</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/DAO/Normalvalue.hbm.xml</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/DAO/User.hbm.xml</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/DAO/Registry.hbm.xml</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/Servlets/NotificationsServlet.java</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/web/monitor.jsp</file>
+            <file>file:/C:/Users/maxi/Documents/GitHub/Jarduino/Jarduino-war/web/home.jsp</file>
+            <file>file:/C:/Users/maxi/Documents/GitHub/Jarduino/Jarduino-war/src/java/Servlets/HomeServlet.java</file>
+            <file>file:/C:/Users/maxi/Documents/GitHub/Jarduino/Jarduino-war/src/java/DAO/Normalvalue.hbm.xml</file>
+            <file>file:/C:/Users/maxi/Documents/GitHub/Jarduino/Jarduino-war/src/java/DAO/Sensor.hbm.xml</file>
+            <file>file:/C:/Users/maxi/Documents/GitHub/Jarduino/Jarduino-war/src/java/DAO/Normalvalue.java</file>
+            <file>file:/C:/Users/maxi/Documents/GitHub/Jarduino/Jarduino-war/src/java/DAO/Sensor.java</file>
+            <file>file:/C:/Users/maxi/Documents/GitHub/Jarduino/Jarduino-war/src/java/Servlets/SensorServlet.java</file>
+            <file>file:/C:/Users/maxi/Documents/GitHub/Jarduino/Jarduino-war/web/Values.jsp</file>
+            <file>file:/C:/Users/maxi/Documents/GitHub/Jarduino/Jarduino-war/src/java/Servlets/valuesServlet.java</file>
         </group>
     </open-files>
 </project-private>

@@ -9,7 +9,6 @@
     <property name="hibernate.cache.use_query_cache">false</property>
     <property name="hibernate.cache.use_second_level_cache">false</property>
     <property name="connection.autocommit">true</property>
-    <property name="hibernate.connection.password">123123123</property>
     <mapping resource="DAO/User.hbm.xml"/>
     <mapping resource="DAO/Normalvalue.hbm.xml"/>
     <mapping resource="DAO/Sensortype.hbm.xml"/>
