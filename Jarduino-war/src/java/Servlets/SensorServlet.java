@@ -14,8 +14,6 @@ import HibernateConf.HibernateUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,6 +24,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 
 /**
@@ -46,6 +45,16 @@ public class SensorServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, InterruptedException {
+
+        HttpSession httpSession = request.getSession(true);
+
+        if (httpSession.getAttribute("user") == null) {
+            RequestDispatcher view;
+            view = request.getRequestDispatcher("login.jsp");
+            view.forward(request, response);
+            return;
+        }
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
@@ -70,6 +79,18 @@ public class SensorServlet extends HttpServlet {
                 RequestDispatcher view = request.getRequestDispatcher("monitor.jsp");
                 view.forward(request, response);
             }
+        } else if (action.equalsIgnoreCase("charts")) {
+            //get sensor id from parms
+            String sensorId = request.getParameter("sId");
+            //build query
+            String hql = "SELECT * FROM Sensor S WHERE S.id =" + sensorId + "";
+            Sensor sensor = (Sensor) session.createSQLQuery(hql).addEntity(Sensor.class).setMaxResults(1).uniqueResult();
+            //set sensor as frontend var
+            request.setAttribute("sensor", sensor);
+            RequestDispatcher view = request.getRequestDispatcher("sensor_charts.jsp");
+            //dispatch view
+            view.forward(request, response);
+
         } else if (action.equalsIgnoreCase("getSensorReg")) {
             if (returnType != null && returnType.equals("json")) {
                 String sensorId = request.getParameter("sId");
@@ -81,6 +102,25 @@ public class SensorServlet extends HttpServlet {
                 Thread.sleep(2000);
                 String hql = "SELECT * FROM registry R WHERE R.idsensor =" + sensorId + " ORDER BY R.date DESC";
                 Registry r = (Registry) session.createSQLQuery(hql).addEntity(Registry.class).setMaxResults(1).uniqueResult();
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.registerTypeAdapter(Registry.class, new RegistryAdapter()).create();
+                String json = gson.toJson(r);
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
+
+            }
+        } else if (action.equalsIgnoreCase("getSensorRegAll")) {
+            if (returnType != null && returnType.equals("json")) {
+                String sensorId = request.getParameter("sId");
+                session.clear();
+                HibernateUtil.getSessionFactory().getCache().evictEntityRegions();
+                HibernateUtil.getSessionFactory().getCache().evictCollectionRegions();
+                HibernateUtil.getSessionFactory().getCache().evictDefaultQueryRegion();
+                HibernateUtil.getSessionFactory().getCache().evictQueryRegions();
+                String hql = "SELECT * FROM registry R WHERE R.idsensor =" + sensorId + " ORDER BY R.date DESC";
+                List<Registry> r = (List<Registry>) session.createSQLQuery(hql).addEntity(Registry.class).list();
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 Gson gson = gsonBuilder.registerTypeAdapter(Registry.class, new RegistryAdapter()).create();
                 String json = gson.toJson(r);

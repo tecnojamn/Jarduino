@@ -5,7 +5,23 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
 
+        //Check for new alerts (notifications)
+        $.get(
+                "Notifications?action=checkNewAlerts",
+                function (data) {
+                    console.log(data.newAlerts[0]);
+                    if (data.newAlerts[0] == "true") {
+                        $("#newAlertsSpan").show();
+                    }
+                },
+                "json"
+                );
+    });
+</script>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -45,7 +61,9 @@
                                 <img class="media-object" src="http://placehold.it/50x50" alt="">
                             </span>
                             <div class="media-body">
-                                <h5 class="media-heading"><strong>User</strong>
+                                <% HttpSession httpSession;
+                                    httpSession = request.getSession(true);%>
+                                <h5 class="media-heading"><strong><%httpSession.getAttribute("user");%></strong>
                                 </h5>
                                 <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -74,34 +92,7 @@
             </ul>
         </li>
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-            <ul class="dropdown-menu alert-dropdown">
-                <li>
-                    <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">View All</a>
-                </li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> User <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= ((DAO.User)httpSession.getAttribute("user")).getUser() %> <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>
                     <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -123,14 +114,10 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
             <li class="active">
-                <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                <a href="home"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
             <li>
-                <a href="Notifications"><i class="fa fa-fw fa-exclamation-triangle"></i>Notifications</a>
-            </li>
-            <li>
-                <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
-            </li>
+                <a href="Notifications"><i class="fa fa-fw fa-bell"></i> Notifications  <span id="newAlertsSpan" title="You have new notifications!" style="display:none;color:#ff9966;"><i class="fa fa-exclamation-triangle"></i></span></a>            </li>
             <li>
                 <a href="valuesS?action=valuesPage"><i class="fa fa-fw fa-bar-chart-o"></i> Management of securities</a>
             </li>

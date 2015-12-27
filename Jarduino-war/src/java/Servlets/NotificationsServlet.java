@@ -20,8 +20,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.json.JSONObject;
 
 /**
  *
@@ -41,27 +43,38 @@ public class NotificationsServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         Transaction tx = null;
+
+        HttpSession httpSession;
+        httpSession = request.getSession(true);
+
+        if (httpSession.getAttribute("user") == null) {
+            RequestDispatcher view;
+            view = request.getRequestDispatcher("login.jsp");
+            view.forward(request, response);
+            return;
+        }
+
         response.setContentType("text/html;charset=UTF-8");
         Session session = HibernateUtil.getSessionFactory().openSession();
         String hql = "SELECT * FROM alert a ORDER BY a.date DESC";
         List<Alert> alerts = (List<Alert>) session.createSQLQuery(hql).addEntity(Alert.class).setMaxResults(50).list();
-        List<Alert> newAlerts = new ArrayList<Alert>(alerts) {};
+        List<Alert> newAlerts = new ArrayList<Alert>(alerts) {
+        };
         Collections.copy(newAlerts, alerts);
-        
+
         request.setAttribute("alerts", alerts);
         RequestDispatcher view = request.getRequestDispatcher("notifications.jsp");
         view.forward(request, response);
-        
-        
+
         //apply filter
-        newAlerts.removeIf(a -> a.getSeen() == true);
-        
-        for(Alert alert : newAlerts){
+        //newAlerts.removeIf(a -> a.getSeen() == true);
+        //newAlerts = select(newAlerts, having(on(Alert.class).getSeen(), equal(false)));
+        for (Alert alert : newAlerts) {
             alert.setSeen(true);
         }
-        
-        
+
+        Transaction tx = null;
+
         try {
             tx = session.beginTransaction();
             for (Alert alert : newAlerts) {
@@ -76,7 +89,7 @@ public class NotificationsServlet extends HttpServlet {
         } finally {
             session.close();
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -91,6 +104,23 @@ public class NotificationsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String action = request.getParameter("action");
+        String returnType = request.getParameter("returnType");
+
+        if (action!= null &&  action.equals("checkNewAlerts")) {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            String hql = "SELECT * FROM alert a WHERE a.seen = 0";
+            boolean newAlerts = session.createSQLQuery(hql).addEntity(Alert.class).setMaxResults(1).list().size() > 0;
+            String newAlertsString = newAlerts == true ? "true": "false";
+            JSONObject resultJSON = new JSONObject();
+            resultJSON.append("newAlerts", newAlertsString);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(resultJSON.toString());
+            return;
+        }
+
         processRequest(request, response);
     }
 
