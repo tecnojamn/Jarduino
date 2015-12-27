@@ -1,12 +1,13 @@
 // Flot Line Charts - Multiple Axes - With Data
-$(function () {
-    var flot_data = [
+var flot_data = [
         [1167692400000, 61.05],
         [1167778800000, 58.32],
         [1167865200000, 57.35],
         [1167951600000, 56.31],
         [1168210800000, 55.55]
     ];
+$(function () {
+    
     function euroFormatter(v, axis) {
         return v.toFixed(axis.tickDecimals) + "€";
     }
