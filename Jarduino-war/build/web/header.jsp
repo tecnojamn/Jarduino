@@ -126,7 +126,7 @@
                             <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="Notifications"><i class="fa fa-fw fa-exclamation-triangle"></i>Notifications</a>
+                            <a href="Notifications"><i class="fa fa-fw fa-exclamation-triangle"></i> Notifications</a> <img style="display:none;" src="img/alert.gif"/>
                         </li>
                         <li>
                             <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
