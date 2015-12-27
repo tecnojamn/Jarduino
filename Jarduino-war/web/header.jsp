@@ -3,7 +3,7 @@
     Created on : 26-dic-2015, 19:31:52
     Author     : Andres
 --%>
-
+<script src="js/jquery.js" type="text/javascript"></script>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
             <!-- Navigation -->
@@ -74,6 +74,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
+                        <!--
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                         <ul class="dropdown-menu alert-dropdown">
                             <li>
@@ -99,6 +100,7 @@
                                 <a href="#">View All</a>
                             </li>
                         </ul>
+                        -->
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> User <b class="caret"></b></a>
@@ -126,12 +128,29 @@
                             <a href="home"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="Notifications"><i class="fa fa-fw fa-exclamation-triangle"></i> Notifications</a> <img style="display:none;" src="img/alert.gif"/>
+                            <a href="Notifications"><i class="fa fa-fw fa-bell"></i> Notifications  <span id="newAlertsSpan" title="You have new notifications!" style="display:none;color:#ff9966;"><i class="fa fa-exclamation-triangle"></i></span></a>
                         </li>
                        
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
+                
+                <script>
+                    $(document).ready(function(){
+                        
+                        //Check for new alerts (notifications)
+                        $.get(
+                            "Notifications?action=checkNewAlerts",
+                            function(data){
+                                console.log(data.newAlerts[0]);
+                                if(data.newAlerts[0] == "true"){
+                                    $("#newAlertsSpan").show();
+                                }  
+                            },
+                            "json"
+                        );
+                    });
+                </script>
             </nav>
     </body>
 

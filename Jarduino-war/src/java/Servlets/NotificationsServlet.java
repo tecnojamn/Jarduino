@@ -112,11 +112,12 @@ public class NotificationsServlet extends HttpServlet {
             Session session = HibernateUtil.getSessionFactory().openSession();
             String hql = "SELECT * FROM alert a WHERE a.seen = 0";
             boolean newAlerts = session.createSQLQuery(hql).addEntity(Alert.class).setMaxResults(1).list().size() > 0;
-            JSONObject result = new JSONObject();
-            result.append("result", newAlerts ? "true" : "false");
+            String newAlertsString = newAlerts == true ? "true": "false";
+            JSONObject resultJSON = new JSONObject();
+            resultJSON.append("newAlerts", newAlertsString);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(result.toString());
+            response.getWriter().write(resultJSON.toString());
             return;
         }
 
