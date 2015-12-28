@@ -61,7 +61,7 @@
                         <div class="col-lg-12">
                             <div class="alert alert-info alert-dismissable">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                Welcome to Javarduino, ${sensors.size()} sensors available
+                                Welcome to Jarduino, ${sensors.size()} sensors available
                             </div>
                         </div>
                     </div>
