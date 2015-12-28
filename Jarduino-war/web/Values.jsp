@@ -97,11 +97,17 @@
 
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                Management  <small>securities</small>
+                                Settings  <small>Javarduino</small>
                             </h1>
+                            <ol class="breadcrumb">
+                                <li class="active">
+                                    <i class="fa fa-wrench"></i> Settings
+                                </li>
+                            </ol>
                         </div>
-                    </div>
+                    </div>                   
                     <!-- /.row -->
+                    
                     <div class="alert alert-danger" role="alert" id="error-alert" style="display:none;">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                         <span class="sr-only">Error: </span>

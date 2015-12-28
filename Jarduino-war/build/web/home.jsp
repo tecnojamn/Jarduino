@@ -83,6 +83,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!--       
                                     <a href="Monitor">
                                         <div class="panel-footer">
                                             <span class="pull-left">Live monitor</span>
@@ -90,6 +91,7 @@
                                             <div class="clearfix"></div>
                                         </div>
                                     </a>
+                                    -->
                                     <a href="Sensor?action=charts&sId=${sensor.id}">
                                         <div class="panel-footer">
                                             <span class="pull-left">Time Chart</span>

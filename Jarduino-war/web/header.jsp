@@ -20,6 +20,16 @@
                 },
                 "json"
                 );
+        
+        //Set active navbar option
+        var pgurl = window.location.href.substr(window.location.href.lastIndexOf("/")+1);
+        console.log(pgurl);
+        $("ul.nav li").each(function(){
+            console.log(this);
+            if(pgurl.indexOf($(this).find("a").attr("href")) > -1)
+            $(this).addClass("active");
+        })
+        
     });
 </script>
 <!-- Navigation -->
@@ -61,9 +71,7 @@
                                 <img class="media-object" src="http://placehold.it/50x50" alt="">
                             </span>
                             <div class="media-body">
-                                <% HttpSession httpSession;
-                                    httpSession = request.getSession(true);%>
-                                <h5 class="media-heading"><strong><%httpSession.getAttribute("user");%></strong>
+                                <h5 class="media-heading"><strong>User</strong>
                                 </h5>
                                 <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -91,8 +99,12 @@
                 </li>
             </ul>
         </li>
+        <%
+            HttpSession httpSession;
+            httpSession = request.getSession(true);
+        %>
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= ((DAO.User)httpSession.getAttribute("user")).getUser() %> <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= ((DAO.User) httpSession.getAttribute("user")).getUser()%> <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>
                     <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -113,13 +125,16 @@
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-            <li class="active">
+            <li>
                 <a href="home"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="Monitor"><i class="fa fa-fw fa-desktop"></i> Live Monitor</a>
             </li>
             <li>
                 <a href="Notifications"><i class="fa fa-fw fa-bell"></i> Notifications  <span id="newAlertsSpan" title="You have new notifications!" style="display:none;color:#ff9966;"><i class="fa fa-exclamation-triangle"></i></span></a>            </li>
             <li>
-                <a href="valuesS?action=valuesPage"><i class="fa fa-fw fa-bar-chart-o"></i> Management of securities</a>
+                <a href="valuesS?action=valuesPage"><i class="fa fa-fw fa-wrench"></i> Settings</a>
             </li>
         </ul>
     </div>

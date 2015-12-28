@@ -43,7 +43,7 @@
                             </h1>
                             <ol class="breadcrumb">
                                 <li class="active">
-                                    <i class="fa fa-dashboard"></i> Notifications
+                                    <i class="fa fa-bell"></i> Notifications
                                 </li>
                             </ol>
 

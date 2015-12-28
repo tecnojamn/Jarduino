@@ -39,7 +39,7 @@
                             </h1>
                             <ol class="breadcrumb">
                                 <li class="active">
-                                    <i class="fa fa-dashboard"></i> Monitor
+                                    <i class="fa fa-desktop"></i> Monitor
                                 </li>
                             </ol>
 
