@@ -46,7 +46,7 @@
 
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                Dashboard <small>Javarduino</small>
+                                Dashboard <small>Jarduino</small>
                             </h1>
                             <ol class="breadcrumb">
                                 <li class="active">
