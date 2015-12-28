@@ -13,6 +13,8 @@ import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 import java.util.Enumeration;
+import org.json.*;
+import Controller.RegistryController;
 import javax.swing.text.StyledEditorKit;
 import sun.security.jca.GetInstance;
 import org.hibernate.Session;
@@ -38,13 +40,10 @@ public class arduinoController implements SerialPortEventListener {
     private int timeOut = 2000;
     private int dataRate = 9600;
 
-    private String lastRead = "0";
+    private RegistryController regCont = new RegistryController();
+    private int[] outputStat = new int[]{0, 0, 0, 0};
 
     private boolean isConected = false;
-
-    public String getLastRead() {
-        return lastRead;
-    }
 
     private arduinoController() {
 
@@ -53,9 +52,24 @@ public class arduinoController implements SerialPortEventListener {
     public static arduinoController GetInstance() {
         return instance;
     }
-
+    
+    public Integer getOutStatus(int index){
+        return outputStat[index];
+    }
+    
     public boolean isConected() {
         return isConected;
+    }
+
+    private void UpdateOutStat(String outStatJson) {
+        JSONObject json = new JSONObject(outStatJson);
+
+        //Obtiene el array de Registos
+        JSONArray arr = json.getJSONArray("OutputStatus");
+
+        for (int i = 0; i <= outputStat.length; i++) {
+            outputStat[i] = arr.getJSONObject(i).getInt("value");
+        }
     }
 
     public void setPort(String portName) {
@@ -131,24 +145,20 @@ public class arduinoController implements SerialPortEventListener {
         }
     }
 
+    @Override
     public synchronized void serialEvent(SerialPortEvent oEvent) {
 
         if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
             try {
                 String inputLine = input.readLine();
-                lastRead = inputLine;
                 System.out.println(inputLine);
+                JSONObject json = new JSONObject(inputLine);
                 try {
-//                    int value = Integer.parseInt(inputLine);
-//                    Session session = HibernateUtil.getSessionFactory().openSession();
-//                    Transaction tx = session.beginTransaction();
-//                    Registry reg = new Registry();
-//                    reg.setDate(new Date());
-//                    reg.setIdsensor(1);
-//                    reg.setValue(value);
-//                    session.save(reg);
-//                    tx.commit();
-//                    session.close();
+                    if (json.has("OutputStatus")) {
+                        UpdateOutStat(inputLine);
+                    } else if (json.has("Registry")) {
+                        regCont.updateRegistry(inputLine);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -158,22 +168,5 @@ public class arduinoController implements SerialPortEventListener {
             }
         }
         // Ignore all the other eventTypes, but you should consider the other ones.
-    }
-
-    public static void main(String[] args) throws Exception {
-        arduinoController main = arduinoController.GetInstance();
-        main.connect();
-        Thread t = new Thread() {
-            public void run() {
-                //the following line will keep this app alive for 1000 seconds,
-                //waiting for events to occur and responding to them (printing incoming messages to console).
-                try {
-                    Thread.sleep(1000000);
-                } catch (InterruptedException ie) {
-                }
-            }
-        };
-        t.start();
-        System.out.println("Started");
     }
 }
