@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/Servlets/UserServlet.java</file>
             <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/Servlets/SensorServlet.java</file>
+            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/HibernateConf/hibernate.cfg.xml</file>
             <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/DAO/Alert.hbm.xml</file>
             <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/web/notifications.jsp</file>
             <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/web/header.jsp</file>

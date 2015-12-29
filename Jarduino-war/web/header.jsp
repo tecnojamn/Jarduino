@@ -17,6 +17,7 @@
                 //success
                 function (data) {
                     if (data.newAlerts[0] === "true") {
+                        beep();
                         $("#newAlertsSpan").show();
                     }
                 },
@@ -35,6 +36,11 @@
         })
         
     });
+    
+    function beep() {
+        var snd = new Audio("js/beep.wav"); 
+        snd.play();
+    }
 </script>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">

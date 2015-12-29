@@ -10,27 +10,37 @@
     $(document).ready(function () {
 
         //Check for new alerts (notifications)
-        $.get(
+        setInterval( function (){
+            $.get(
+                //url
                 "Notifications?action=checkNewAlerts",
+                //success
                 function (data) {
-                    console.log(data.newAlerts[0]);
-                    if (data.newAlerts[0] == "true") {
+                    if (data.newAlerts[0] === "true") {
+                        beep();
                         $("#newAlertsSpan").show();
                     }
                 },
+                //datatype
                 "json"
-                );
+            );
+        }, 5000)
+        
+        
         
         //Set active navbar option
         var pgurl = window.location.href.substr(window.location.href.lastIndexOf("/")+1);
-        console.log(pgurl);
         $("ul.nav li").each(function(){
-            console.log(this);
             if(pgurl.indexOf($(this).find("a").attr("href")) > -1)
             $(this).addClass("active");
         })
         
     });
+    
+    function beep() {
+        var snd = new Audio("js/beep.wav"); 
+        snd.play();
+    }
 </script>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
