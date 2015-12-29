@@ -15,6 +15,7 @@ import gnu.io.SerialPortEventListener;
 import java.util.Enumeration;
 import org.json.*;
 import Controller.RegistryController;
+import Controller.AlertController;
 import javax.swing.text.StyledEditorKit;
 import sun.security.jca.GetInstance;
 import org.hibernate.Session;
@@ -43,6 +44,7 @@ public class arduinoController implements SerialPortEventListener {
     private int dataRate = 9600;
 
     private RegistryController regCont = new RegistryController();
+    private AlertController alertCont = new AlertController();
 
     private Map<Integer, Integer> outputStat = new HashMap<Integer, Integer>();
     private boolean isConected = false;
@@ -174,6 +176,7 @@ public class arduinoController implements SerialPortEventListener {
                         UpdateOutStat(inputLine);
                     } else if (json.has("Registry")) {
                         regCont.updateRegistry(inputLine);
+                        alertCont.checkAndSaveAlert(inputLine);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

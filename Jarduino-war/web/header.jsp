@@ -149,6 +149,9 @@
                 <a href="Monitor"><i class="fa fa-fw fa-desktop"></i> Live Monitor</a>
             </li>
             <li>
+                <a href="Actions"><i class="glyphicon glyphicon-off"></i> Actions</a>
+            </li>
+            <li>
                 <a href="Notifications"><i class="fa fa-fw fa-bell"></i> Notifications  <span id="newAlertsSpan" title="You have new notifications!" style="display:none;color:#ff9966;"><i class="fa fa-exclamation-triangle"></i></span></a>            </li>
             <li>
                 <a href="valuesS?action=valuesPage"><i class="fa fa-fw fa-wrench"></i> Settings</a>

@@ -8,7 +8,7 @@
     <class name="DAO.Alert" table="alert" catalog="datacenterreg" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <!--
         <property name="idsensor" type="int">
