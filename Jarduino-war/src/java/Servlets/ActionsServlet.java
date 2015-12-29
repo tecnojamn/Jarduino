@@ -45,9 +45,9 @@ public class ActionsServlet extends HttpServlet {
             List<Output> output;
             output = outputCon.getOutputs();
             //Ingresa los estados de los dispositivo de salida
-//            for (Output out : output) {
-//                out.setStatus(ardCont.getOutStatus(out.getId()));
-//            }
+            for (Output out : output) {
+                out.setStatus(ardCont.getOutStatus(out.getId()));
+            }
             RequestDispatcher view;
             request.setAttribute("output", output);
             view = request.getRequestDispatcher("actions.jsp");
@@ -55,6 +55,7 @@ public class ActionsServlet extends HttpServlet {
         } else if (action.equals("switch")) {
             Integer id = Integer.parseInt(request.getParameter("idOutput"));
             outputCon.switchOutput(id);
+            response.sendRedirect("Actions");
         }
     }
 

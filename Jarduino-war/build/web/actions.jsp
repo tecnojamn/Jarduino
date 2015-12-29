@@ -63,7 +63,7 @@
                                         <td><c:out value="${output.getDescription()}"/></td>
                                         <c:choose>
                                             <c:when test="${output.getStatus()==1}">
-                                                <td><button type="button" class="btn btn-danger">OFF</button></td>
+                                                <td><a href="Actions?action=switch&idOutput=<c:out value="${output.getId()}"/>"><button type="button" class="btn btn-danger">OFF</button></a></td>
                                             </c:when>
                                             <c:otherwise>
                                                 <td><a href="Actions?action=switch&idOutput=<c:out value="${output.getId()}"/>"><button type="button" class="btn btn-success">ON</button></a></td>

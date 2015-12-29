@@ -37,6 +37,7 @@ public class OutputController {
         System.out.println(data);
         try {
             arduinoController.GetInstance().sendData(data);
+            arduinoController.GetInstance().setOutStatus(id);
             return true;
         } catch (Exception e) {
         }

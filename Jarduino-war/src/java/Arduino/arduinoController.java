@@ -56,7 +56,18 @@ public class arduinoController implements SerialPortEventListener {
     }
 
     public Integer getOutStatus(int key) {
+        if (outputStat.get(key) == null) {
+            return 0;
+        }
         return outputStat.get(key);
+    }
+
+    public void setOutStatus(int key) {
+        if (outputStat.get(key) == 1) {
+            outputStat.put(key, 0);
+        } else {
+            outputStat.put(key, 1);
+        }
     }
 
     public boolean isConected() {

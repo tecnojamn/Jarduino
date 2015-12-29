@@ -115,9 +115,11 @@ public class UserServlet extends HttpServlet {
                 } catch (Exception e) {
                 }
                 if (us != null) {
-                    arduinoController.GetInstance().connect();
-                    session.setAttribute("user", us);
-                    arduinoController.GetInstance().sendData("OUTS");
+                    if (!arduinoController.GetInstance().isConected()) {
+                        arduinoController.GetInstance().connect();
+                        session.setAttribute("user", us);
+                        arduinoController.GetInstance().sendData("OUTS");
+                    }
                     response.sendRedirect("home");
                 } else {
                     //login incorrecto
