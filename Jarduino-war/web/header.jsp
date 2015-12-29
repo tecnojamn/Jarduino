@@ -8,8 +8,11 @@
 <script src="js/jquery.js" type="text/javascript"></script>
 <script>
     $(document).ready(function () {
-
+            
+            
         //Check for new alerts (notifications)
+        var stopTheFuckingBeep = false;
+        
         setInterval( function (){
             $.get(
                 //url
@@ -17,14 +20,18 @@
                 //success
                 function (data) {
                     if (data.newAlerts[0] === "true") {
-                        beep();
+                        
+                        if(!stopTheFuckingBeep){  beep(); }          
+           
+                        if(pgurl.indexOf("Monitor") > -1){ stopTheFuckingBeep = true;}
+                        
                         $("#newAlertsSpan").show();
                     }
                 },
                 //datatype
                 "json"
             );
-        }, 5000)
+        }, 5000);
         
         
         
