@@ -16,5 +16,6 @@
     <mapping resource="DAO/Registry.hbm.xml"/>
     <mapping resource="DAO/Sensor.hbm.xml"/>
     <mapping resource="DAO/Alert.hbm.xml"/>
+    <mapping resource="DAO/Output.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
