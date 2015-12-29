@@ -39,9 +39,9 @@ public class ActionsServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
+        arduinoController ardCont = arduinoController.GetInstance();
+        OutputController outputCon = new OutputController();
         if (action == null) {
-            arduinoController ardCont = arduinoController.GetInstance();
-            OutputController outputCon = new OutputController();
             List<Output> output;
             output = outputCon.getOutputs();
             //Ingresa los estados de los dispositivo de salida
@@ -52,6 +52,9 @@ public class ActionsServlet extends HttpServlet {
             request.setAttribute("output", output);
             view = request.getRequestDispatcher("actions.jsp");
             view.forward(request, response);
+        } else if (action.equals("switch")) {
+            Integer id = Integer.parseInt(request.getParameter("idOutput"));
+            outputCon.switchOutput(id);
         }
     }
 

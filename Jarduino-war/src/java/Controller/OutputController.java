@@ -10,6 +10,7 @@ import HibernateConf.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import Arduino.arduinoController;
 
 /**
  *
@@ -22,11 +23,23 @@ public class OutputController {
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             org.hibernate.Transaction tx = session.beginTransaction();
-            output = (List<Output>)session.createQuery("from Output").list();
+            output = (List<Output>) session.createQuery("from Output").list();
             return output;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public boolean switchOutput(Integer id) {
+        String data = "OUT";
+        data = data + id.toString();
+        System.out.println(data);
+        try {
+            arduinoController.GetInstance().sendData(data);
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
     }
 }

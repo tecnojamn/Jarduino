@@ -3,17 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/Servlets/UserServlet.java</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/Servlets/SensorServlet.java</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/HibernateConf/hibernate.cfg.xml</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/DAO/Alert.hbm.xml</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/web/notifications.jsp</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/web/header.jsp</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/DAO/Sensortype.hbm.xml</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/DAO/Sensor.hbm.xml</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/web/login.jsp</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/Servlets/NotificationsServlet.java</file>
-            <file>file:/C:/Users/Andres/Documents/GitHub%20Repo/Jarduino/Jarduino-war/src/java/DAO/Alert.java</file>
+            <file>file:/C:/Users/Julio/Documents/GitHub/Jarduino/Jarduino-war/src/java/Servlets/ActionsServlet.java</file>
+            <file>file:/C:/Users/Julio/Documents/GitHub/Jarduino/Jarduino-war/src/java/Controller/OutputController.java</file>
+            <file>file:/C:/Users/Julio/Documents/GitHub/Jarduino/Jarduino-war/src/java/Servlets/UserServlet.java</file>
+            <file>file:/C:/Users/Julio/Documents/GitHub/Jarduino/Jarduino-war/src/java/Servlets/NotificationsServlet.java</file>
+            <file>file:/C:/Users/Julio/Documents/GitHub/Jarduino/Jarduino-war/web/actions.jsp</file>
+            <file>file:/C:/Users/Julio/Documents/GitHub/Jarduino/Jarduino-war/src/java/Controller/RegistryController.java</file>
+            <file>file:/C:/Users/Julio/Documents/GitHub/Jarduino/Jarduino-war/src/java/HibernateConf/hibernate.cfg.xml</file>
+            <file>file:/C:/Users/Julio/Documents/GitHub/Jarduino/Jarduino-war/src/java/Arduino/arduinoController.java</file>
         </group>
     </open-files>
 </project-private>

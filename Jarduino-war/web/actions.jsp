@@ -66,7 +66,7 @@
                                                 <td><button type="button" class="btn btn-danger">OFF</button></td>
                                             </c:when>
                                             <c:otherwise>
-                                                <td><a href="#"><button type="button" class="btn btn-success">ON</button></a></td>
+                                                <td><a href="Actions?action=switch&idOutput=<c:out value="${output.getId()}"/>"><button type="button" class="btn btn-success">ON</button></a></td>
                                             </c:otherwise>
                                         </c:choose>  
                                     </tr>
