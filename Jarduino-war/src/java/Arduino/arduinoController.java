@@ -24,6 +24,8 @@ import org.hibernate.Transaction;
 import HibernateConf.HibernateUtil;
 import DAO.*;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -36,13 +38,13 @@ public class arduinoController implements SerialPortEventListener {
     private BufferedReader input;
     private OutputStream output = null;
 
-    private String portName = "COM4";
+    private String portName = "COM3";
     private int timeOut = 2000;
     private int dataRate = 9600;
 
     private RegistryController regCont = new RegistryController();
-    private int[] outputStat = new int[]{0, 0, 0, 0};
 
+    private Map<Integer, Integer> outputStat = new HashMap<Integer, Integer>();
     private boolean isConected = false;
 
     private arduinoController() {
@@ -52,11 +54,11 @@ public class arduinoController implements SerialPortEventListener {
     public static arduinoController GetInstance() {
         return instance;
     }
-    
-    public Integer getOutStatus(int index){
-        return outputStat[index];
+
+    public Integer getOutStatus(int key) {
+        return outputStat.get(key);
     }
-    
+
     public boolean isConected() {
         return isConected;
     }
@@ -67,8 +69,10 @@ public class arduinoController implements SerialPortEventListener {
         //Obtiene el array de Registos
         JSONArray arr = json.getJSONArray("OutputStatus");
 
-        for (int i = 0; i <= outputStat.length; i++) {
-            outputStat[i] = arr.getJSONObject(i).getInt("value");
+        for (int i = 0; i < arr.length(); i++) {
+            int id = arr.getJSONObject(i).getInt("idOutput");
+            int value = arr.getJSONObject(i).getInt("value");
+            outputStat.put(id, value);
         }
     }
 
@@ -153,6 +157,7 @@ public class arduinoController implements SerialPortEventListener {
                 String inputLine = input.readLine();
                 System.out.println(inputLine);
                 JSONObject json = new JSONObject(inputLine);
+                System.out.println(inputLine);
                 try {
                     if (json.has("OutputStatus")) {
                         UpdateOutStat(inputLine);
