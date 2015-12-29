@@ -16,12 +16,20 @@ public class Output implements Serializable {
     public Integer id;
     private String name;
     private String description;
-
+    private int Status = 0;
     public Output() {
     }
 
     public Output(Integer id) {
         this.id = id;
+    }
+
+    public int getStatus() {
+        return Status;
+    }
+
+    public void setStatus(int Status) {
+        this.Status = Status;
     }
 
     public Output(Integer id, String name, String description) {

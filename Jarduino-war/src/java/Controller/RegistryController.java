@@ -52,7 +52,7 @@ public class RegistryController {
     //Lee la configuracion que se encuentra en conf/RegistryConf
     private void readConfXml() {
         try {
-            File inputFile = new File("src/java/Conf/RegistryConf.xml");
+            File inputFile = new File("C:/Users/Julio/Documents/GitHub/Jarduino/Jarduino-war/src/java/Conf/RegistryConf.xml");
             DocumentBuilderFactory dbFactory
                     = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -87,7 +87,7 @@ public class RegistryController {
         }
     }
 
-    //El string debe estar em formato json
+    //El string debe estar en formato json
     public boolean updateRegistry(String dataJson) {
         try {
             //Crea objeto json con string por parametro

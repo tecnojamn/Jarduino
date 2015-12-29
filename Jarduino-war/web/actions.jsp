@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="Arduino.arduinoController" %>
+<% arduinoController ardCont = arduinoController.GetInstance();%>
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -51,13 +53,22 @@
                                 <tr> 
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Desc</th>
+                                    <th>Description</th>
+                                    <th>Swicth ON/OFF</th>
                                 </tr>
                                 <c:forEach items="${output}" var="output">
                                     <tr>
                                         <td><c:out value="${output.getId()}"/></td>
                                         <td><c:out value="${output.getName()}"/></td>  
                                         <td><c:out value="${output.getDescription()}"/></td>
+                                        <c:choose>
+                                            <c:when test="${output.getStatus()==1}">
+                                                <td><button type="button" class="btn btn-danger">OFF</button></td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td><a href="#"><button type="button" class="btn btn-success">ON</button></a></td>
+                                            </c:otherwise>
+                                        </c:choose>  
                                     </tr>
                                 </c:forEach>
                             </table>

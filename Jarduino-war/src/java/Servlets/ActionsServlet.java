@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Controller.OutputController;
+import Arduino.arduinoController;
 import DAO.Output;
 import java.util.List;
 
@@ -38,10 +39,15 @@ public class ActionsServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
-        OutputController outputCon = new OutputController();
-        List<Output> output;
         if (action == null) {
+            arduinoController ardCont = arduinoController.GetInstance();
+            OutputController outputCon = new OutputController();
+            List<Output> output;
             output = outputCon.getOutputs();
+            //Ingresa los estados de los dispositivo de salida
+//            for (Output out : output) {
+//                out.setStatus(ardCont.getOutStatus(out.getId()));
+//            }
             RequestDispatcher view;
             request.setAttribute("output", output);
             view = request.getRequestDispatcher("actions.jsp");
