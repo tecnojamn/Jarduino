@@ -92,6 +92,7 @@ public class RegistryController {
         try {
             //Crea objeto json con string por parametro
             JSONObject json = new JSONObject(dataJson);
+            
             //Obtiene el array de Registos
             JSONArray arr = json.getJSONArray("Registry");
             //Recorre el array
